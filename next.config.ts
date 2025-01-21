@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  env: {
+    mongo_db_string: process.env.mongo_db_string,
+  }
 };
 
 export default nextConfig;
