@@ -14,7 +14,55 @@ interface paramsInterface {
 
 const today = new Date();
 
+export async function GET(request : Request, { params }: paramsInterface) : Promise<NextResponse> {
 
+  dbConnection();
+
+  try {
+    //Get the url parameters 
+    const { symbol } = await params;
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get("page") || "1",10);
+    const limit = parseInt(searchParams.get("limit") || "1",10);
+    //Parameters Validations
+    if ( page < 1 || limit < 1 ) {
+      return NextResponse.json(
+        { message: "Los parametros 'page' y 'limit' deben ser mayores a 0." },
+        {status:400}
+      )
+    }
+    //Calcular valores  para paginacion
+    const skip = (page - 1) * limit;
+    
+    const [stocks, total] = await Promise.all([
+      StockModel.find({"meta.symbol": symbol})
+      .skip(skip)
+      .limit(limit)
+      .sort({"value.datetime": -1}),
+      StockModel.countDocuments()
+    ]);
+
+    return NextResponse.json(
+      {
+        data: stocks,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit)
+        }
+
+      }
+    );
+
+  } catch (error :any) {
+    return NextResponse.json(
+      { message: `Error al obtener películas: ${error.message}` },
+      { status: 500 })
+  }
+
+  //return  NextResponse.json({});
+}
 
 export async function POST(
   request: Request,
