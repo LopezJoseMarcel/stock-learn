@@ -1,17 +1,30 @@
-import { NextResponse } from "next/server"; 
+'use server';
+import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import authByEmailPwd from "@/utils/authByEmailPwd";
 
-export async function POST(request: Request): Promise<NextResponse> {
+export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
     if (!email || !password) {
-      return NextResponse.json({ message: 'Faltan datos' }, { status: 400 });
+      return new Response(JSON.stringify({ message: "Faltan datos" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    const { userId } = await authByEmailPwd(email, password);
+    const authResult = await authByEmailPwd(email, password);
+
+    if (!authResult) {
+      return new Response(JSON.stringify({ message: "Credenciales inválidas" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const { userId } = authResult;
 
     const token = jwt.sign(
       {
@@ -21,25 +34,23 @@ export async function POST(request: Request): Promise<NextResponse> {
       process.env.JWT_PRIVATE_KEY as string
     );
 
-    const serialized = serialize('tokenJWT', token, {
+    const serialized = serialize("tokenJWT", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 30, // En segundos
-      path: '/',
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
     });
 
-    const headers = { 'Set-Cookie': serialized };
-
-    return NextResponse.json({ message: 'Login exitoso' }, { headers });
+    return new Response(JSON.stringify({ message: "Login exitoso" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", "Set-Cookie": serialized },
+    });
   } catch (error: any) {
-    console.error('Error en el login:', error.message);
-
-    // Asegurar que se devuelve JSON sin interrumpir la app
-    return NextResponse.json(
-      { message: error.message || 'Error interno en el servidor' },
-      { status: 401 }
-    );
+    console.error("Error en el login:", error.message);
+    return new Response(JSON.stringify({ message: "Error interno del servidor" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
-

@@ -11,24 +11,19 @@ export default async function authByEmailPwd(email: string, password: string) {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      // Usuario no encontrado
-      throw new Error("Usuario no encontrado");
+      return null; 
     }
 
     // Verificar contraseña
     const verified = await verifyPassword(password, user.password);
 
     if (!verified) {
-      // Contraseña incorrecta
-      throw new Error("Contraseña incorrecta");
+      return null; 
     }
 
-    // Devolver el ID del usuario
     return { userId: user._id };
   } catch (error: any) {
     console.error("Error en authByEmailPwd:", error.message);
-    throw new Error(
-      error.message || "Error interno en el servidor durante la autenticación"
-    );
+    return null; // Retornar null en caso de error en la base de datos
   }
 }

@@ -6,7 +6,7 @@ export async function createHash(password:string) : Promise<string> {
     return hashPassWord; 
 }
 
-export async function verifyPassword(hashedPassword: string, password: string): Promise<boolean> {
-    return await verify(hashedPassword, password);
+export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
+    return verify(hashedPassword, password);
 }
 
