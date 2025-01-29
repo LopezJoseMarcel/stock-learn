@@ -10,14 +10,20 @@
   },
   "dependencies": {
     "@formkit/tempo": "^0.1.2",
+    "@node-rs/argon2": "^2.0.2",
     "axios": "^1.7.9",
+    "cookie": "^1.0.2",
+    "jose": "^5.9.6",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "next": "15.1.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

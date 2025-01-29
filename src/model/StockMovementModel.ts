@@ -1,24 +1,8 @@
 import mongoose from "mongoose";
-
-interface StockMovement {
-  user_id: mongoose.Schema.Types.ObjectId;
-  symbol: string;
-  sharesQuantityTotal: number;
-  averageOpeningPrice: number;
-  profitLossTotal: number;
-  movements: {
-    movementType: "sell" | "buy";
-    sharesQuantity: number;
-    openingPrice: number;
-    closingPrice: number;
-    profitLoss: number;
-    openDate: Date;
-    closeDate:Date;
-  }[];
-}
+import { StockMovement } from "@/types/interfacesModel"
 
 const StockMovementSchema = new mongoose.Schema<StockMovement>({
-  user_id: {type: mongoose.Schema.Types.ObjectId},
+  user_id: {type: mongoose.Schema.Types.ObjectId, required: true},
   symbol: { type: String, required: true }, // Consider making symbol required
   sharesQuantityTotal: { type: Number },
   averageOpeningPrice: { type: Number },
