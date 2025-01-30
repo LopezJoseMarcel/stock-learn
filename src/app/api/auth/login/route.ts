@@ -1,30 +1,31 @@
-'use server';
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
-import authByEmailPwd from "@/utils/authByEmailPwd";
+import userModel from "@/model/userModel";
+import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
     if (!email || !password) {
-      return new Response(JSON.stringify({ message: "Faltan datos" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json({message: "Faltan Datos", code: 1});
     }
 
-    const authResult = await authByEmailPwd(email, password);
+    const userExistence = await userModel.findOne({email})
 
-    if (!authResult) {
-      return new Response(JSON.stringify({ message: "Credenciales inválidas" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
+    if (!userExistence) {
+      return NextResponse.json({message: "Credenciales inválidas", code: 1});
     }
 
-    const { userId } = authResult;
+    const checkPassword = await bcrypt.compare(password, userExistence.password);
+
+    if (!checkPassword) {
+      return NextResponse.json({message: "Credenciales inválidas", code: 1});
+    }
+
+
+    const { userId } = userExistence;
 
     const token = jwt.sign(
       {
@@ -42,15 +43,10 @@ export async function POST(request: Request) {
       path: "/",
     });
 
-    return new Response(JSON.stringify({ message: "Login exitoso" }), {
-      status: 200,
-      headers: { "Content-Type": "application/json", "Set-Cookie": serialized },
-    });
-  } catch (error: any) {
-    console.error("Error en el login:", error.message);
-    return new Response(JSON.stringify({ message: "Error interno del servidor" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    const headers = { "Set-Cookie": serialized };
+
+    return NextResponse.json({ message: "Login exitoso", code:0}, { headers });
+  } catch (err: any) {
+    return NextResponse.json({message: err}, {status: 500});
   }
 }
