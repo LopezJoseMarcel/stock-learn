@@ -2,6 +2,7 @@ import userModel from "@/model/userModel";
 import { dbConnection } from "@/utils/dbConnection";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
+import { UserModelInterface } from "@/types/interfacesModel";
 
 export async function POST(request: Request ) : Promise<NextResponse> {
     try {
@@ -14,10 +15,12 @@ export async function POST(request: Request ) : Promise<NextResponse> {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = new userModel({
+        const newUser = new userModel<UserModelInterface>({
             userName,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            buyingPower: 0
+            
         });
 
         await newUser.save();

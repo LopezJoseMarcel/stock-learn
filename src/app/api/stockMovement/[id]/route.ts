@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import StockMovementModel from "@/model/StockMovementModel";
 import { dbConnection } from "@/utils/dbConnection";
-//import { useRouter } from "next/router";
 
 interface paramsInterface {
   params: Promise<{ id: string }>

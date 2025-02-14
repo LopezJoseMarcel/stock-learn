@@ -1,3 +1,4 @@
+import { format } from "@formkit/tempo";
 
 export default function getFirstDate(data: any[]) {
     
@@ -12,6 +13,8 @@ export default function getFirstDate(data: any[]) {
         }
     });
     
-    return firstDate;   
+    const dateString: string = format(firstDate, "YYYY-MM-DD", "en")
+
+    return dateString;   
 
 }

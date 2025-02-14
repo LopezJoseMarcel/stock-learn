@@ -1,3 +1,4 @@
+"use client"
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -18,7 +19,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("/api/auth/profile");
+      const { data } = await axios.get("/api/auth/profile",{ withCredentials: true });
       setUser(data);
     } catch {
       setUser(null);

@@ -8,3 +8,20 @@ export interface LoginFormInputs {
     password: string;
 }
 
+export interface ButtonTextProps {
+  text: string;
+  type: "button" | "submit" | "reset";
+  onClick?: () => void;
+  onChange?: () => void;
+}
+
+export interface useCapitalsHookProps {
+  capital: number;
+  grandTotOpenPrice: number;  
+  profitsLosses: number;
+}
+
+
+
+
+

@@ -2,15 +2,15 @@ import React from "react";
 
 interface paramsInterface{
   params: {
-    tableTitle: string[];
-    data: string[];
+    tableTitle: string;
+    data?: string[];
   }
 }
 
-export default function TableMovements() {
+export default function TableMovements({ params } : paramsInterface) {
   return (
     <div className="rounded-xl bg-white flex flex-col items-center py-2">
-      <h3 className="text-customOrange_dark font-bold">Posiciones Abiertas</h3>
+      <h3 className="text-customOrange_dark font-bold">{params.tableTitle}</h3>
       <table className="border-collapse">
         <thead>
           <tr>

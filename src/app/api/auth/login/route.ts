@@ -3,9 +3,12 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import userModel from "@/model/userModel";
 import bcrypt from "bcrypt";
+import { dbConnection } from "@/utils/dbConnection";
 
 export async function POST(request: Request) {
   try {
+    await dbConnection();
+
     const { email, password } = await request.json();
 
     if (!email || !password) {
@@ -25,7 +28,7 @@ export async function POST(request: Request) {
     }
 
 
-    const { userId } = userExistence;
+    const userId  = userExistence._id;
 
     const token = jwt.sign(
       {

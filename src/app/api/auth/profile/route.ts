@@ -24,4 +24,5 @@ export async function GET(request: Request): Promise<NextResponse> {
     return NextResponse.json({message:"Error al verificar el token" }, { status: 401 });
   }
 }
+//tokenJWT=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzg0NDk2NzQsImlhdCI6MTczODI3Njg3NH0.n_DEjK4D8FZzVWJBcLZfq3xiNtl21G-l8caAx4ucUu0; Max-Age=2592000; Path=/; HttpOnly; SameSite=Strict
 
