@@ -5,21 +5,21 @@ import getFirstDate from "@/utils/getfirstDate";
 
 interface paramsInterface {
   params: {
-    tableTitle: string[];
+    tableTitle: string;
+    tableHeaders: string[];
     data: StockMovement[] ;
   };
 }
 
-
 export default  function TableMovements({ params }: paramsInterface) {
   return (
-    <div className="rounded-xl bg-white flex flex-col items-center py-2">
-      <h3 className="text-customOrange_dark font-bold">Posiciones Abiertas</h3>
+    <div className="w-full rounded-xl bg-white flex flex-col items-center py-2">
+      <h3 className="text-customOrange_dark font-bold">{params.tableTitle}</h3>
       <table className="border-collapse">
         <thead>
           <tr>
-          { params.tableTitle.map(title => (
-            <th key={ params.tableTitle.indexOf(title) } className="px-4 py-2   text-customGrey_dark text-xs font-bold">
+          { params.tableHeaders.map(title => (
+            <th key={ params.tableHeaders.indexOf(title) } className="px-4 py-2   text-customGrey_dark text-xs font-bold">
               {title}
             </th>
           )) 
@@ -29,13 +29,13 @@ export default  function TableMovements({ params }: paramsInterface) {
         </thead>
         <tbody>
           {params.data?.length > 0 ? (
-            params.data.map((element) => (
+            params.data.slice(0,5).map((element) => (
               <tr key={element.symbol} className="border-t border-gray-200">
                 <td className="px-4 py-2 text-customGrey_dark text-xs font-thin text-center">
                   {element.symbol}
                 </td>
                 <td className="px-4 py-2 text-customGrey_dark text-xs font-thin text-center">
-                  {element.sharesQuantityTotal}
+                  {element.openSharesTotal}
                 </td>
                 <td className="px-4 py-2 text-customGrey_dark text-xs font-thin text-center">
                   {getFirstDate(
@@ -56,6 +56,14 @@ export default  function TableMovements({ params }: paramsInterface) {
           )}
         </tbody>
       </table>
+      {params.data?.length > 4 && (
+        <section className="flex w-full pr-7 justify-end">
+          <h3 className="text-blue-400 text-xs font-thin text-center">see more</h3>
+        </section>
+       )
+
+      }
+     
     </div>
   );
 }

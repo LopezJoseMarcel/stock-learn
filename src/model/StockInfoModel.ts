@@ -1,9 +1,5 @@
 import mongoose from  "mongoose" ;
-
-interface StockModelInfo {
-   symbol :  string ;
-   logo_url: string;
-}
+import { StockModelInfo } from "@/types/interfacesModel";
 
 const StockInfoSchema = new mongoose.Schema<StockModelInfo>({
     symbol :  {type: String} ,

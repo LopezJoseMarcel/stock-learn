@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+export interface StockModelInfo {
+  symbol :  string ;
+  logo_url: string;
+}
+
 export interface MovementsEntries {
     movementType: "sell" | "buy";
     sharesQuantity: number;
@@ -20,6 +25,7 @@ export interface MovementsEntries {
   movements: MovementsEntries[]
   lastPrice: number;
   openSharesTotal:number;
+  closeSharesTotal:number;
 }
 export interface StockMovementHook  {
   openPosition: StockMovement[];
@@ -27,6 +33,7 @@ export interface StockMovementHook  {
 }
 
 export interface Stock {
+  logoUrl?: string;
   meta: {
     symbol: string;
     interval: string;
