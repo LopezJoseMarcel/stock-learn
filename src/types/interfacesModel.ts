@@ -30,6 +30,7 @@ export interface MovementsEntries {
 export interface StockMovementHook  {
   openPosition: StockMovement[];
   closePosition: StockMovement[];
+  allPosition:StockMovement[];
 }
 
 export interface Stock {

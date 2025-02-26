@@ -22,6 +22,7 @@ const useMovementHook = (userId: string | null) => {
         let newMovement: StockMovementHook = {
           closePosition: [],
           openPosition: [],
+          allPosition: [],
         };
 
         if (movements.length > 0) {
@@ -34,6 +35,7 @@ const useMovementHook = (userId: string | null) => {
             const lastStockPrice = await stockLastPriceService(stock.symbol);
             const lastPrice: number = lastStockPrice.data.value.close;
             const openEntriesCount : number = counterStockType(stock.movements,"buy");
+ 
 
             newMovement.openPosition.push({ ...stock, lastPrice: Number(lastPrice), openSharesTotal: openEntriesCount });
           }
@@ -45,7 +47,7 @@ const useMovementHook = (userId: string | null) => {
 
             newMovement.closePosition.push({ ...stock, lastPrice: Number(lastPrice), openSharesTotal: closeEntriesCount });
           }
-
+          newMovement.allPosition = newMovement.openPosition.concat(newMovement.closePosition);
           setStockMovements(newMovement);
           console.log("newMovement", newMovement);
         }

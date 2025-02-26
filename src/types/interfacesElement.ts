@@ -32,6 +32,12 @@ export interface IconButton extends ButtonProps {
   icon: React.ReactNode;
 }
 
+export interface CabeceraStockProps{
+  urlLogo: string;
+  symbol: string;
+  
+}
+
 
 
 
