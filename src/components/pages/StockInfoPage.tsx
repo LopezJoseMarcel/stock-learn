@@ -1,58 +1,35 @@
 "use client";
 import React from "react";
 import CabeceraStock from "../common/CabeceraStock";
-import LabelPrice from "../common/LabelPrice";
 import StockChart from "../common/StockChart";
 import { useUser } from "@/contexts/userContex";
-import TableStock from "../common/TableStock";
 import useMovementHook from "@/hooks/useMovementsHook";
-import { CircularProgress } from "@mui/material";
-
-
+import ButtonText from "../common/ButtonText";
+import { useRouter } from "next/navigation";
+import PositionSection from "../containers/PositionSecction";
 
 export default function StockInfoPage({ symbol }: { symbol: string }) {
- 
   const { user } = useUser();
   const { stockMovements, loading } = useMovementHook(user?.id ?? "");
+  const router  = useRouter();
+
+  const handleRoute = () => {
+    router.push(`/stock/${symbol}/negotiate`);
+  }
+
   const filtredOpenStock =
     stockMovements?.allPosition.find((stock) => stock.symbol === symbol) ||
     null;
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <CabeceraStock />
-      <LabelPrice params={{ text: "400.11" }} />
+      <CabeceraStock params={{ symbol: symbol }} />
       <section className="flex  justify-center">
         <StockChart params={{ symbol: symbol }} />
       </section>
-
-      <section className="flex flex-col items-center content-center gap-4">
-        {(stockMovements && !loading) ? (
-          <>
-            <TableStock
-              key={"open"}
-              params={{
-                type: "buy",
-                tableHeaders: ["Quantity", "Open Date", "Open Price"],
-                tableTitle: "Open Positions",
-                data: filtredOpenStock,
-              }}
-            />
-            <>
-              <TableStock
-                key={"open"}
-                params={{
-                  type: "sell",
-                  tableHeaders: ["Quantity", "Open Date", "Open Price"],
-                  tableTitle: "Close Positions",
-                  data: filtredOpenStock,
-                }}
-              />
-            </>
-          </>
-        ): 
-         <CircularProgress color="success" />
-        }
-      </section>
+      <PositionSection params={{stockMovements: stockMovements, loading, symbol}}/>
+      <footer className="flex w-full items-center justify-center mt-3 mb-3">
+         <ButtonText params={{ text: "Negociar" , type:"button" , onClick:handleRoute }}  />
+      </footer>
     </div>
   );
 }

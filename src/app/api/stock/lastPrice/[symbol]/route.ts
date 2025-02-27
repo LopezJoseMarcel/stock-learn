@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { dbConnection } from "@/utils/dbConnection";
 import StockModel from "@/model/StockModel";
+import StockInfoModel from "@/model/StockInfoModel";
 import axios from "axios";
 import getAvailbleDate from "@/utils/getAvailableDate";
-
 
 
 interface paramsInterface {
@@ -17,6 +17,11 @@ export async function GET(request: Request, { params }: paramsInterface): Promis
 
   try {
     const { symbol } = await params;
+
+    //traer el logo 
+    const stockinfo = await StockInfoModel.findOne({symbol : symbol}).exec();
+    const urlLogo = stockinfo?.logo_url || "";
+    //end traer el logo
 
     const lastStocKPrice = await StockModel
     .find({
@@ -56,7 +61,7 @@ export async function GET(request: Request, { params }: paramsInterface): Promis
 
     }
 
-    return NextResponse.json({"data": lastStocKPrice[0]});
+    return NextResponse.json({"data": lastStocKPrice[0], urlLogo});
 
   } catch (error: any) {
     return NextResponse.json(
@@ -64,6 +69,4 @@ export async function GET(request: Request, { params }: paramsInterface): Promis
       { status: 500 }
     );
   }
-
-  
 }

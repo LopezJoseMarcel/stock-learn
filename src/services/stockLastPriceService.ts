@@ -12,7 +12,7 @@ export async function stockLastPriceService(symbol: string) {
           throw new Error(data.message);
       }
   
-      return data
+      return data;
   
       
     } catch (error) {

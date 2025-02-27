@@ -1,12 +1,10 @@
 "use client";
 import React from "react";
-import ButtonIcon from "../common/ButtonIcon";
-import { FaArrowCircleLeft } from "react-icons/fa";
 import ButtonTextSquare from "../common/ButtonTextSquare";
 import InputText from "@/components/common/InputText";
 import { useFormContext } from "react-hook-form";
 import { Backdrop, CircularProgress } from "@mui/material";
-import { useRouter } from "next/navigation";
+import ButtonGoBack from "../common/ButtonGoBack";
 
 interface SearchStockParams {
   onSubmit: (data: { query: string }) => void;
@@ -23,18 +21,10 @@ export default function SearchStockSection({
 }: SearchStockParams) {
   const { register, handleSubmit } = useFormContext<FormData>();
 
-  const router = useRouter();
-
   return (
     <>
       <div className="absolute top-3 left-3">
-        <ButtonIcon
-          params={{
-            icon: <FaArrowCircleLeft size={25} color="#666666" />,
-            type: "button",
-            onClick: () => {router.push("/dashboard")}
-          }}
-        />
+        <ButtonGoBack/>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex mt-12 w-full gap-4">

@@ -16,11 +16,11 @@ const StockChart = ({ params }: StockChartParams) => {
 
   return (
     <div className="w-full p-4">
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={200}>
         <LineChart data={stocks}>
           <XAxis hide dataKey="datetime" />
           <YAxis />
-          <Tooltip contentStyle={{backgroundColor: '#fff5eb', border: 'none', borderRadius: '16px'}}  
+          <Tooltip contentStyle={{backgroundColor: '#fff5eb', border: 'none', borderRadius: '8px'}}  
             itemStyle={{color: '#666666', fontWeight:"bold", textAlign:"center"}}
             labelStyle={{color: '#666666', textAlign:"center"}}
             

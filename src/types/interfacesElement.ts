@@ -33,10 +33,9 @@ export interface IconButton extends ButtonProps {
 }
 
 export interface CabeceraStockProps{
-  urlLogo: string;
   symbol: string;
-  
 }
+
 
 
 

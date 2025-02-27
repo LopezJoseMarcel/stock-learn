@@ -1,15 +1,18 @@
 import React from "react";
 import Image from "next/image";
 import { Stock } from "@/types/interfacesModel";
+import Link from "next/link";
 
 interface StockItemParams {
-    params: Stock
+  params: Stock;
 }
 
 export default function StockItem({ params }: StockItemParams) {
-    return (
-        <div className='flex w-full items-start gap-4 border-b-4 p-4'>
-        <div className='flex items-end gap-4'>
+  return (
+    
+      <div className="flex w-full items-start gap-4 border-b-4 p-4">
+        <Link href={`/stock/${params.meta.symbol}`}>
+        <div className="flex items-end gap-4">
           <Image
             src={params.logoUrl as string}
             alt="stock"
@@ -17,10 +20,15 @@ export default function StockItem({ params }: StockItemParams) {
             height={30}
             quality={85}
             className="object-contain"
-            /> 
-            <span className='text-customGrey_dark '>{params.meta.symbol}</span>
-            <span className='text-customGreen_dark font-bold'> US { Number (params.value.close).toFixed(2)}</span>
-        </div>
+          />
+          <span className="text-customGrey_dark ">{params.meta.symbol}</span>
+          <span className="text-customGreen_dark font-bold">
+            {" "}
+            US {Number(params.value.close).toFixed(2)}
+          </span>
+        </div> 
+        </Link>
       </div>
-    )
+   
+  );
 }

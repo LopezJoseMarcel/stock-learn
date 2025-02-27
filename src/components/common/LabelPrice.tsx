@@ -8,7 +8,7 @@ interface LabelPriceParams {
 
 export default function LabelPrice( {params}: LabelPriceParams ){
   return(
-    <span className="text-customOrange_dark font-bold ml-4" >
+    <span className="text-customGreen_dark font-bold" >
         $ {params.text}
     </span>
   )
