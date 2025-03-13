@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { StockMovement } from "@/types/interfacesModel"
 
 const StockMovementSchema = new mongoose.Schema<StockMovement>({
+  _id: { type: mongoose.Schema.Types.ObjectId, auto:true },
   user_id: {type: mongoose.Schema.Types.ObjectId, required: true},
   symbol: { type: String, required: true }, // Consider making symbol required
   sharesQuantityTotal: { type: Number },
@@ -16,6 +17,7 @@ const StockMovementSchema = new mongoose.Schema<StockMovement>({
       profitLoss: { type: Number},
       openDate: {type: Date},
       closeDate: { type: Date},
+      _id: { type: mongoose.Schema.Types.ObjectId, auto: true},
     },
   ],
 });

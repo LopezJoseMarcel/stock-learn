@@ -10,7 +10,7 @@ export default function ButtonTextSec({ params }: buttonProps) {
 
   
   return (
-    <button type={ params.type } onClick={ params.onClick }
+    <button disabled = {params.disabled} type={ params.type } onClick={ params.onClick }
     className={`bg-customOrange_dark hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-3xl`}>
       { params.text}
     </button>

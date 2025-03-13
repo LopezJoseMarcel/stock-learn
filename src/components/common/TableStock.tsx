@@ -34,7 +34,7 @@ export default function TableStock({ params }: paramsInterface) {
               </tr>
             </thead>
             <tbody>
-              {params.data?.movements.length > 0 ? (
+              {(params.data?.movements.length > 0 && params.data.movements.filter(mov => mov.movementType === params.type).length > 0 ) ? (
                 params.data.movements.filter(mov => mov.movementType === params.type).slice(0, 5).map((element) => (
                   <tr
                     key={params.data?.movements.indexOf(element)}

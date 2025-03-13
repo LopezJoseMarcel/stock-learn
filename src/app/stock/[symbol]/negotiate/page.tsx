@@ -11,7 +11,7 @@ export default async function Page({ params }: stockParams) {
 
   return (
     <div className="w-full h-full bg-white ">
-      <NegotationPage/>
+      <NegotationPage props={{symbol}}/>
     </div>
   );
 }

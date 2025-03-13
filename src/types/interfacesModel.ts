@@ -9,15 +9,17 @@ export interface MovementsEntries {
     movementType: "sell" | "buy";
     sharesQuantity: number;
     openingPrice: number;
-    closingPrice: number;
-    profitLoss: number;
+    closingPrice?: number;
+    profitLoss?: number;
     openDate: Date;
-    closeDate:Date;
+    closeDate?:Date;
+    _id?: string;
+
 }
 
-
  export interface StockMovement {
-  user_id: mongoose.Schema.Types.ObjectId;
+  _id?: string;
+  user_id: string;
   symbol: string;
   sharesQuantityTotal: number;
   averageOpeningPrice: number;
@@ -61,5 +63,15 @@ export interface UserModelInterface {
     movements?: mongoose.Schema.Types.ObjectId[];
     buyingPower: number;
 }
+
+export interface UserModelUpdate{
+  userName? : string;
+  email?: string;
+  password?: string;
+  movements?: mongoose.Schema.Types.ObjectId[];
+  buyingPower?: number;
+}
+
+
 
 

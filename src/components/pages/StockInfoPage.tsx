@@ -17,9 +17,6 @@ export default function StockInfoPage({ symbol }: { symbol: string }) {
     router.push(`/stock/${symbol}/negotiate`);
   }
 
-  const filtredOpenStock =
-    stockMovements?.allPosition.find((stock) => stock.symbol === symbol) ||
-    null;
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <CabeceraStock params={{ symbol: symbol }} />

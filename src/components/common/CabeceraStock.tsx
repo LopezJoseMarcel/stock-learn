@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import LabelPrice from "../common/LabelPrice";
+import LabelPrice from "./LabelGreen";
 import useLastInfoStock from "@/hooks/useLastInfoStock";
 import { CabeceraStockProps } from "@/types/interfacesElement";
 import { CircularProgress } from "@mui/material";
@@ -34,7 +34,7 @@ export default function CabeceraStock({ params }: CabeceraStockParams) {
             </span>
             <LabelPrice
               params={{
-                text: Number(stockInfo?.value.close).toFixed(2) || "-",
+                text: `$ ${Number(stockInfo?.value.close).toFixed(2) || "-"}`,
               }}
             />
           </div>

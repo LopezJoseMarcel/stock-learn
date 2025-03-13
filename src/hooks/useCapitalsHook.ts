@@ -6,7 +6,7 @@ import { useCapitalsHookProps } from '@/types/interfacesElement';
 
 const useCapitalsHook = (userId: string | undefined, buyingPower: number | null) => {
     const [capital, setCapital] = useState<useCapitalsHookProps | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     
     useEffect(() => {

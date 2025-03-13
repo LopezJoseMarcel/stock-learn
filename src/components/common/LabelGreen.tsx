@@ -6,10 +6,10 @@ interface LabelPriceParams {
     }
 }
 
-export default function LabelPrice( {params}: LabelPriceParams ){
+export default function LabelGreen( {params}: LabelPriceParams ){
   return(
     <span className="text-customGreen_dark font-bold" >
-        $ {params.text}
+        {params.text}
     </span>
   )
 }

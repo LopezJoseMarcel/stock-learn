@@ -36,6 +36,13 @@ export interface CabeceraStockProps{
   symbol: string;
 }
 
+export interface FormNegoBuy {
+  "total": string,
+  "buttonGroupOperation": "buy" | "sell",
+  "purchaseDate": string,
+  "sharesQuantity": string,
+  "stockPrice": string
+}
 
 
 

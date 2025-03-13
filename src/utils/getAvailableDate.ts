@@ -2,7 +2,7 @@ import { parse, addDay, format  } from "@formkit/tempo";
 
 export default function getAvailbleDate(): string {
 
-    let today : Date = addDay(new Date(),-5) ;
+    let today : Date = addDay(new Date(),-1) ;
     
     let actualDateDay = format(today, "dddd", "en");
     console.log(actualDateDay);

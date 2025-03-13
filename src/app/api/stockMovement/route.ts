@@ -4,7 +4,7 @@ import { dbConnection } from "@/utils/dbConnection";
 import StockMovementCalculator from "@/utils/stockMovementCalculator";
 
 export async function POST(request: Request): Promise<NextResponse> {
-  dbConnection();
+   await dbConnection();
 
   try {
     const body = await request.json();
@@ -22,6 +22,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       movements,
     });
 
+    console.log(newMovement);
     const savedNewMovement = await newMovement.save();
 
     // Retornar la respuesta
@@ -35,7 +36,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 }
 
 export async function GET(request: Request): Promise<NextResponse> {
-  dbConnection();
+ await dbConnection();
 
   try {
     const { searchParams } = new URL(request.url);

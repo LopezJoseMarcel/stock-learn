@@ -1,5 +1,4 @@
 import StockInfoPage from "@/components/pages/StockInfoPage";
-//import { useParams } from "next/navigation";
 
 interface stockParams {
   params: Promise<{symbol: string}>;

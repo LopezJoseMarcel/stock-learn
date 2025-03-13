@@ -32,7 +32,9 @@ export default async function capitalsCalculator(userId: string, buyingPower: nu
       }
 
        const profitsLosses = grandTotLastPrice - grandTotOpenPrice;
-  
+       console.log("buyingPower + grandTotLastPrice", buyingPower + grandTotLastPrice);
+       console.log("profitsLosses", profitsLosses);
+
       return { capital: buyingPower + grandTotLastPrice, grandTotOpenPrice,  profitsLosses};
     } catch (error) {
       console.error(error);
