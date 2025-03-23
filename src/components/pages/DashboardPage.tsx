@@ -40,7 +40,7 @@ function DashboardPage() {
             <>
               <LabelInfo
                 params={{
-                  titleMoney: `US ${
+                  titleMoney: `USD ${
                     capital?.capital ? capital.capital.toFixed(2) : 0
                   }`,
                   titleText: "CAPITAL",
@@ -48,12 +48,22 @@ function DashboardPage() {
               />
               <LabelInfo
                 params={{
-                  titleMoney: `US ${
+                  titleMoney: `USD ${
                     capital?.profitsLosses
                       ? capital.profitsLosses.toFixed(2)
                       : 0
                   }`,
                   titleText: "PROFITS/LOSSES",
+                }}
+              />
+              <LabelInfo
+                params={{
+                  titleMoney: `USD ${
+                    profile?.buyingPower
+                      ? profile?.buyingPower.toFixed(2)
+                      : 0
+                  }`,
+                  titleText: "BUYING POWER",
                 }}
               />
             </>
@@ -97,7 +107,7 @@ function DashboardPage() {
               )}
             </>
           )}
-          { !stockMovements && !loading && (
+          {!stockMovements && !loading && (
             <>
               <Image
                 src="/lobo.svg"
@@ -110,8 +120,7 @@ function DashboardPage() {
                 You don't have any stock!
               </span>
             </>
-        )}
-
+          )}
         </div>
 
         <div className="fixed bottom-0  p-4 ">

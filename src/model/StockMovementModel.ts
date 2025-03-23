@@ -3,7 +3,7 @@ import { StockMovement } from "@/types/interfacesModel"
 
 const StockMovementSchema = new mongoose.Schema<StockMovement>({
   _id: { type: mongoose.Schema.Types.ObjectId, auto:true },
-  user_id: {type: mongoose.Schema.Types.ObjectId, required: true},
+  user_id: {type: String, required: true},
   symbol: { type: String, required: true }, // Consider making symbol required
   sharesQuantityTotal: { type: Number },
   averageOpeningPrice: { type: Number },

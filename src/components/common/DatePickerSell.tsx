@@ -7,7 +7,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs"; // Para manejar fechas
 
-export default function DatePicker() {
+export default function DatePickerSell() {
   const { control } = useFormContext(); // Obtener contexto de React Hook Form
 
   return (
@@ -16,10 +16,11 @@ export default function DatePicker() {
         <Controller
           name="purchaseDate"
           control={control}
-          defaultValue={null} // Inicialmente vacío
+          defaultValue={new Date()} // Inicialmente vacío
           rules={{ required: "La fecha es obligatoria" }} // Validación
           render={({ field, fieldState }) => (
             <MobileDatePicker
+              
               {...field}
               label="Purchase Date"
               disableFuture

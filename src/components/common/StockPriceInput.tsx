@@ -35,6 +35,7 @@ export default function StockPriceInput({ props }: StockPriceInputProps) {
     
       <div>
         <TextField
+        required
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": { borderColor: "#ff9d23" },

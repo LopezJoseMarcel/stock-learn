@@ -5,7 +5,7 @@ export default async function updateMovementEntry(movementId: string, entryId: s
       const res = await fetch(`/api/stockMovement/${movementId}?posId=${entryId}`, {
           method: "PATCH",
           headers: { "Content-Type" : "application/json"},
-          body: JSON.stringify(entry),
+          body: JSON.stringify({ movement: entry }),
       });
   
       const data  = await res.json();

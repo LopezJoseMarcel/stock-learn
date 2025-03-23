@@ -5,11 +5,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-export default function ButtonGroupOperation() {
+interface propsButtonGroup {
+  selectedForm : "sale" | "buy",
+  onChange : (value: "sale" | "buy") => void
+}
+
+export default function ButtonGroupOperation( { selectedForm, onChange } : propsButtonGroup ) {
 
   return (
     <>
-      <FormControl>
+      <FormControl >
             <FormLabel
               sx={{
                 color: "#666666",
@@ -24,6 +29,9 @@ export default function ButtonGroupOperation() {
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              defaultValue={"buy"}
+              value={selectedForm}
+              onChange={(e) => onChange(e.target.value as "sale" | "buy")}
             >
               <FormControlLabel
                 sx={{ color: "#666666", fontWeight: "medium" }}
